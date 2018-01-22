@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Counter App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="Container"></div>
+    <script type="text/babel">
+       
+const box = {
+    width: '800px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+}
+
+const appBox = {
+    borderStyle: 'solid',
+    borderWidth: '2px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+}
+
+const counter = {
+    textAlign: 'center',
+    padding: '20px',
+}
+  
+  const buttonBox = {
+      clear: 'both',
+      height: '100px',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    }
+    
+    const mainButton = {
+        float: 'left',
+    }
+    
+    class AddCounter extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = { 
+                counters: []
+            }
+            this.incrementCounterElement = this.incrementCounterElement.bind(this);
+        }
+        incrementCounterElement() {
+            let updatedArray = this.state.counters;
+            let key = this.state.counters.length;
+            updatedArray.push(<App key={key}/>)
+            this.setState({counters: updatedArray})
+        }
+        render() {
+            return (
+                <div>
+                    <button onClick={this.incrementCounterElement} >
+                        Add Counter
+                        </button>
+                        <div>
+                            {this.state.counters}
+                            </div>
+                            </div>
+                        )
+                    }
+                }
+                
+                class App extends React.Component {
+                    constructor(props) {
+                        super(props);
+                        this.state = { count: 0 };
+                    }
+                    
+                    addHandleClick() {
+                        
+                        this.setState({
+                            count: this.state.count + 1
+                        }, function() {
+                            
+                        });
+                    }
+                    
+                    subtractHandleClick() {
+                        
+                        this.setState({
+                            count: this.state.count - 1
+                        }, function() {
+                            
+                        });
+                    }
+                    render() {
+                        return (
+                            <div className="MainDiv" style={box}>
+                                <div className="App" style={appBox}>
+                                    <div className="click-count" style={counter}>
+                                        {this.state.count}
+                                        </div>
+                                        <div style={buttonBox}>
+                                            <button onClick={this.subtractHandleClick.bind(this)}>
+                                                Subtract One
+                                                </button>
+                                                <button  onClick={this.addHandleClick.bind(this)}>
+                                                    Add One
+                                                    </button>
+                                                    </div>
+                                                    </div>
+                                                    </div>
+                                                );
+                                            }
+                                        }
+                                        
+                                        ReactDOM.render(
+                                            <AddCounter />,
+                                            document.getElementById('Container')
+                                        );
+                                        </script>
+
+</body>
+
+</html>
